@@ -22,12 +22,6 @@ class CreateUsersTable extends Migration
             $table->rememberToken();
             $table->timestamps();
         });
-
-        Schema::table('users', function (Blueprint $table) {
-            $table->string('roleType')->nullable();
-            $table->unsignedBigInteger('customerID')->nullable();
-            $table->unsignedBigInteger('restaurantID')->nullable();
-        });
     }
 
     /**

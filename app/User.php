@@ -37,7 +37,13 @@ class User extends Authenticatable
         'email_verified_at' => 'datetime',
     ];
 
-    public function roles(){
-        return $this->hasMany('App\Role');
+    /* Each user may relate to many bookings */
+    public function booking(){
+        return $this->hasMany('App\Booking');
+    }
+
+    /* Each user may own a single restaurant */
+    public function restaurant(){
+        return $this->hasOne('App\Restaurant');
     }
 }
