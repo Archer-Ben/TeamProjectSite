@@ -34,9 +34,17 @@ class CreateForeignKeys extends Migration
      */
     public function down()
     {
-        Schema::dropForeign('restaurants_user_id_foreign');
-        Schema::dropForeign('bookings_user_id_foreign');
-        Schema::dropForeign('bookings_restaurant_id_foreign');
-        Schema::dropForeign('table_availabilities_restaurant_id_foreign');
+        Schema::table('restaurants', function (Blueprint $table) {
+            $table->dropForeign('restaurants_user_id_foreign');
+        });
+
+        Schema::table('bookings', function (Blueprint $table) {
+            $table->dropForeign('bookings_user_id_foreign');
+            $table->dropForeign('bookings_restaurant_id_foreign');
+        });
+
+        Schema::table('table_availabilities', function (Blueprint $table) {
+            $table->dropForeign('table_availabilities_restaurant_id_foreign');
+        });
     }
 }

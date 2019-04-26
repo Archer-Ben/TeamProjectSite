@@ -9,9 +9,15 @@
             <li class="nav-item">
                 <a class="nav-link" href="/">Home</a>
             </li>
+            @guest
+            @else
+            <li class="nav-item">
+            <a class="nav-link" href="/profile">Profile</a>
+                </li>
             <li class="nav-item">
                 <a class="nav-link" href="/dashboard">Dashboard</a>
             </li>
+            @endguest
         </ul>
         <!-- Right Side Of Navbar -->
         <ul class="navbar-nav ml-auto">

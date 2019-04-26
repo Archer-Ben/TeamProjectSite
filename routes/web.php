@@ -19,6 +19,8 @@ Route::get('/results', 'PagesController@results');
 
 Route::post('/results', 'PagesController@results');
 
+Route::get('/profile', 'PagesController@profile');
+
 Auth::routes();
 
 /*Route::get('/dashboard', 'DashboardController@index');*/
