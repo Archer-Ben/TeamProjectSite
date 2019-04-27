@@ -24,6 +24,7 @@
         @include('inc.navbar')
         <br/>
         <main class="container">
+            {{-- @include('inc.messages') --}}
             @yield('content')
         </main>
     </div>

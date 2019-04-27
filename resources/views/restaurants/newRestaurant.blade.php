@@ -21,12 +21,12 @@
     <!--Phone number-->
         <div class="form-group row">
             {{Form::label('phoneNumber', 'Phone number', ['class' => 'col-sm-2 col-form-label'])}}
-            {{Form::text('phoneNumber', '', ['class' => 'form-control col-sm-10', 'placeholder' => 'Customer enquiries phone number', 'required' => 'required'])}}
+            {{Form::tel('phoneNumber', '', ['class' => 'form-control col-sm-10', 'placeholder' => 'Customer enquiries phone number (eg. 01234 567891)', 'pattern' => '[0-9]{5} [0-9]{6}', 'required' => 'required'])}}
         </div>
     <!--Max table size-->
         <div class="form-group row">
             {{Form::label('maxTableSize', 'Maximum table size', ['class' => 'col-sm-2 col-form-label'])}}
-            {{Form::selectRange('groupsize', 1, 20, ['class' => 'form-control col-sm-10', 'required' => 'required'])}}
+            {{Form::selectRange('maxTableSize', 1, 20, ['class' => 'form-control col-sm-10', 'required' => 'required'])}}
         </div>
         {{Form::submit('Submit', ['class' => 'btn btn-primary'])}}
     {!! Form::close() !!}

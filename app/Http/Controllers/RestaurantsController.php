@@ -38,7 +38,7 @@ class RestaurantsController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        
     }
 
     /**
