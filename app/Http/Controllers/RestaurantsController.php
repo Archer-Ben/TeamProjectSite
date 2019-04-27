@@ -5,6 +5,8 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Input;
+use App\Restaurant;
+use App\User;
 
 class RestaurantsController extends Controller
 {
@@ -38,7 +40,19 @@ class RestaurantsController extends Controller
      */
     public function store(Request $request)
     {
-        
+        $user = Auth::user();
+        $restaurant = new Restaurant;
+        $restaurant->name = $request->input('name');
+        $restaurant->location = $request->input('location');
+        $restaurant->latitude = 52.804796;
+        $restaurant->longitude = -1.648510;
+        $restaurant->phone_number = $request->input('phoneNumber');
+        $restaurant->max_table_size = $request->input('maxTableSize');
+        $restaurant->user_id = $user->id;
+        $restaurant->save();
+        // Need to make an update function for users
+        $user->owns_restaurant = true;
+        return redirect('/dashboard')->with('success', 'Restaurant created. Welcome to your dashboard.');
     }
 
     /**
