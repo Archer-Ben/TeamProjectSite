@@ -17,7 +17,7 @@ class RestaurantsController extends Controller
      */
     public function index()
     {
-        return view('restaurants.index');
+        return redirect('/profile');
     }
 
     /**
@@ -29,7 +29,10 @@ class RestaurantsController extends Controller
     {
         $title = 'Create your restaurant';
         $user = Auth::user();
-        return view('restaurants.newRestaurant', ['title' => $title, 'user' => $user]);
+        return view('restaurants.createRestaurant', [
+            'title' => $title, 
+            'user' => $user
+        ]);
     }
 
     /**
@@ -50,9 +53,11 @@ class RestaurantsController extends Controller
         $restaurant->max_table_size = $request->input('maxTableSize');
         $restaurant->user_id = $user->id;
         $restaurant->save();
-        // Need to make an update function for users
-        $user->owns_restaurant = true;
-        return redirect('/dashboard')->with('success', 'Restaurant created. Welcome to your dashboard.');
+        
+        $user->openRestaurant();
+        $user->save();
+        return $this->show($user->id);
+        // return redirect('/restaurant/')->with('success', 'Restaurant created. Welcome to your dashboard. From here you can control the number of tables that you want to advertise.');
     }
 
     /**
@@ -63,7 +68,14 @@ class RestaurantsController extends Controller
      */
     public function show($id)
     {
-        //
+        $title = 'Dashboard';
+        $user = Auth::user();
+        $restaurant = Restaurant::where('user_id', $id)->firstOrFail();
+        return view('restaurants.dashboard', [
+            'title' => $title, 
+            'user' => $user, 
+            'restaurant' => $restaurant
+        ]);
     }
 
     /**
@@ -97,6 +109,12 @@ class RestaurantsController extends Controller
      */
     public function destroy($id)
     {
-        //
+        $user = Auth::user();
+        $restaurant = Restaurant::where('user_id', $id)->firstOrFail();
+        $restaurant->delete();
+        $user->destroyRestaurant();
+        $user->save();
+
+        return redirect('/profile')->with('success', 'Restaurant deleted.');
     }
 }

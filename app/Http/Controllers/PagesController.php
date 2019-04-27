@@ -5,19 +5,19 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Input;
+use App\Restaurant;
 
 class PagesController extends Controller
 {
     public function index(){
         $title = 'Welcome to Table5';
         $user = Auth::user();
-        return view('pages.index', ['title' => $title, 'user' => $user]);
-    }
-
-    public function dashboard(){
-        $title = 'Dashboard';
-        $user = Auth::user();
-        return view('pages.dashboard', ['title' => $title, 'user' => $user]);
+        // $restaurant = Restaurant::where('user_id', $user->id)->first();
+        // return view('pages.index', ['title' => $title, 'user' => $user, 'restaurant' => $restaurant]);
+        return view('pages.index', [
+            'title' => $title, 
+            'user' => $user
+        ]);
     }
 
     public function results(){
@@ -25,7 +25,14 @@ class PagesController extends Controller
         $user = Auth::user();
         $location = Input::get('location');
         $groupsize = Input::get('groupsize');
-        return view('pages.results', ['title' => $title, 'user' => $user, 'location' => $location, 'groupsize' => $groupsize]);
+        $restaurants = Restaurant::all();
+        return view('pages.results', [
+            'title' => $title,
+            'user' => $user, 
+            'location' => $location, 
+            'groupsize' => $groupsize, 
+            'restaurants' => $restaurants
+        ]);
     }
 
     public function profile(){
@@ -33,10 +40,4 @@ class PagesController extends Controller
         $user = Auth::user();
         return view('pages.profile', ['title' => $title, 'user' => $user]);
     }
-    
-    // public function newRestaurant(){
-    //     $title = 'Create your restaurant';
-    //     $user = Auth::user();
-    //     return view('restaurants.newRestaurant', ['title' => $title, 'user' => $user]);
-    // }
 }

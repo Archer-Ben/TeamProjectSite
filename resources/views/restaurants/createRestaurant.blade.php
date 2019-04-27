@@ -5,7 +5,7 @@
 @section('content')
     <h1 class = "display-4">{{$title}}</h1>
     
-    <p>Here you can fill the necessary details to get your restaurant started with Table5.</p>
+    <p>Here you can fill in the necessary details to get your restaurant started with Table5.</p>
 
     {!! Form::open(['action' => 'RestaurantsController@store', 'method' => 'post']) !!}
     <!--Restaurant name-->

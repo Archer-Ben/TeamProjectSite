@@ -50,4 +50,12 @@ class User extends Authenticatable
     public function ownsRestaurant(){
         return $this->owns_restaurant;
     }
+
+    public function openRestaurant(){
+        $this->owns_restaurant = true;
+    }
+
+    public function destroyRestaurant(){
+        $this->owns_restaurant = false;
+    }
 }

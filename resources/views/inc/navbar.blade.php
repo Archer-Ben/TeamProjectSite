@@ -16,7 +16,7 @@
             </li>
             @if ($user->owns_restaurant)
             <li class="nav-item">
-                <a class="nav-link" href="/dashboard">Dashboard</a>
+            <a class="nav-link" href="/restaurants/{{$user->id}}">Dashboard</a>
             </li>
             @endif
             @endguest
