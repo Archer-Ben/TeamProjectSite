@@ -4,7 +4,7 @@
 
 @section('content')
     <div class="container border">
-        <h1>{{$title}}</h1>
+        <h1 class = "display-4">{{$title}}</h1>
         <p>User ID: {{$user->id}}</p>
         <p>Name: {{$user->name}}</p>
         <p>Email: {{$user->email}}</p>

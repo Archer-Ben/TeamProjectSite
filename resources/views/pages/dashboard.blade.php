@@ -3,7 +3,7 @@
 
 
 @section('content')
-    <h1>{{$title}}</h1>
+    <h1 class = "display-4">{{$title}}</h1>
     
     </form>
 @endsection
