@@ -13,14 +13,18 @@
 
 Route::get('/', 'PagesController@index');
 
-Route::get('/dashboard', 'PagesController@dashboard');
+Route::get('/dashboard', 'PagesController@dashboard')->middleware('auth', 'checkOwnsRestaurant');
 
 Route::get('/results', 'PagesController@results');
 
 Route::post('/results', 'PagesController@results');
 
-Route::get('/profile', 'PagesController@profile');
+Route::get('/profile', 'PagesController@profile')->middleware('auth');
+
+Route::get('/newrestaurant', 'RestaurantsController@create')->middleware('auth');
 
 Auth::routes();
+
+Route::resource('restaurants', 'RestaurantsController');
 
 /*Route::get('/dashboard', 'DashboardController@index');*/

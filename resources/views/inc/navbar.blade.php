@@ -12,11 +12,13 @@
             @guest
             @else
             <li class="nav-item">
-            <a class="nav-link" href="/profile">Profile</a>
-                </li>
+                <a class="nav-link" href="/profile">Profile</a>
+            </li>
+            @if ($user->owns_restaurant)
             <li class="nav-item">
                 <a class="nav-link" href="/dashboard">Dashboard</a>
             </li>
+            @endif
             @endguest
         </ul>
         <!-- Right Side Of Navbar -->

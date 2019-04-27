@@ -3,6 +3,8 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Input;
 
 class RestaurantsController extends Controller
 {
@@ -23,7 +25,9 @@ class RestaurantsController extends Controller
      */
     public function create()
     {
-        //
+        $title = 'Create your restaurant';
+        $user = Auth::user();
+        return view('restaurants.newRestaurant', ['title' => $title, 'user' => $user]);
     }
 
     /**

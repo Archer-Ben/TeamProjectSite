@@ -22,6 +22,7 @@
 <body>
     <div id="app">
         @include('inc.navbar')
+        <br/>
         <main class="container">
             @yield('content')
         </main>

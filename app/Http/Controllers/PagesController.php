@@ -29,8 +29,14 @@ class PagesController extends Controller
     }
 
     public function profile(){
-        $title = 'User Profile';
+        $title = 'My profile';
         $user = Auth::user();
         return view('pages.profile', ['title' => $title, 'user' => $user]);
     }
+    
+    // public function newRestaurant(){
+    //     $title = 'Create your restaurant';
+    //     $user = Auth::user();
+    //     return view('restaurants.newRestaurant', ['title' => $title, 'user' => $user]);
+    // }
 }
