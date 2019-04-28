@@ -26,3 +26,5 @@ Route::get('/newrestaurant', 'RestaurantsController@create')->middleware('auth')
 Auth::routes();
 
 Route::resource('restaurants', 'RestaurantsController');
+
+

@@ -7,6 +7,7 @@ use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Input;
 use App\Restaurant;
 use App\User;
+use App\TableAvailability;
 
 class RestaurantsController extends Controller
 {
@@ -54,6 +55,10 @@ class RestaurantsController extends Controller
         $restaurant->user_id = $user->id;
         $restaurant->save();
         
+        $availability = new TableAvailability;
+        $availability->restaurant_id = $restaurant->id;
+        $availability->save();
+
         $user->openRestaurant();
         $user->save();
         return $this->show($user->id);
@@ -71,10 +76,14 @@ class RestaurantsController extends Controller
         $title = 'Dashboard';
         $user = Auth::user();
         $restaurant = Restaurant::where('user_id', $id)->firstOrFail();
+        $availability = TableAvailability::where('restaurant_id', $restaurant->id)->firstOrFail();
+        $availabilityArray = json_decode($availability);
         return view('restaurants.dashboard', [
             'title' => $title, 
             'user' => $user, 
-            'restaurant' => $restaurant
+            'restaurant' => $restaurant,
+            'availability' => $availability,
+            'availabilityArray' => $availabilityArray
         ]);
     }
 
@@ -116,5 +125,12 @@ class RestaurantsController extends Controller
         $user->save();
 
         return redirect('/profile')->with('success', 'Restaurant deleted.');
+    }
+
+    public function updateAvailability(Request $request, $id)
+    {
+        $availability = TableAvailability::where('restaurant_id', $id);
+        $availability->size_1 = $request->input('size_1');
+        $availability->save();
     }
 }

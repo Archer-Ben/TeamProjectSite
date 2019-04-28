@@ -12,6 +12,7 @@
         @if(count($restaurants) > 0)
             @foreach($restaurants as $restaurant)
                 <div class="card">
+                    <div class="col col-"
                     <h4>{{$restaurant->name}}</h4>
                 </div>
             @endforeach
