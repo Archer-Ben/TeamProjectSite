@@ -120,7 +120,9 @@ class RestaurantsController extends Controller
     {
         $user = Auth::user();
         $restaurant = Restaurant::where('user_id', $id)->firstOrFail();
+        $availabilites = TableAvailability::where('restaurant_id', $restaurant->id)->firstOrFail();
         $restaurant->delete();
+        $availabities->delete();
         $user->destroyRestaurant();
         $user->save();
 
@@ -129,8 +131,30 @@ class RestaurantsController extends Controller
 
     public function updateAvailability(Request $request, $id)
     {
-        $availability = TableAvailability::where('restaurant_id', $id);
+        $availability = TableAvailability::where('restaurant_id', $id)->firstOrFail();
         $availability->size_1 = $request->input('size_1');
+        $availability->size_2 = $request->input('size_2');
+        $availability->size_3 = $request->input('size_3');
+        $availability->size_4 = $request->input('size_4');
+        $availability->size_5 = $request->input('size_5');
+        $availability->size_6 = $request->input('size_6');
+        $availability->size_7 = $request->input('size_7');
+        $availability->size_8 = $request->input('size_8');
+        $availability->size_9 = $request->input('size_9');
+        $availability->size_10 = $request->input('size_10');
+        $availability->size_11 = $request->input('size_11');
+        $availability->size_12 = $request->input('size_12');
+        $availability->size_13 = $request->input('size_13');
+        $availability->size_14 = $request->input('size_14');
+        $availability->size_15 = $request->input('size_15');
+        $availability->size_16 = $request->input('size_16');
+        $availability->size_17 = $request->input('size_17');
+        $availability->size_18 = $request->input('size_18');
+        $availability->size_19 = $request->input('size_19');
+        $availability->size_20 = $request->input('size_20');
         $availability->save();
+
+        $user = Auth::user();
+        return $this->show($user->id);
     }
 }
