@@ -16,6 +16,12 @@
                         <h4>{{$restaurant->name}}</h4>
                         <p>{{$restaurant->description}}</p>
                     </div>
+                    <div class="col">
+                        {!! Form::open(['action' => 'BookingsController@store', 'method' => 'post']) !!}
+                            {{Form::hidden('id', $restaurant->id)}}
+                            {{Form::submit('Create reservation', ['class' => 'btn btn-primary'])}}
+                        {!! Form::close() !!}
+                    </div>
                 </div>
             @endforeach
         @else

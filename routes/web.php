@@ -27,4 +27,6 @@ Auth::routes();
 
 Route::resource('restaurants', 'RestaurantsController');
 
+Route::resource('bookings', 'BookingsController');
+
 Route::post('/restaurant/{restaurant}', 'RestaurantsController@updateAvailability');

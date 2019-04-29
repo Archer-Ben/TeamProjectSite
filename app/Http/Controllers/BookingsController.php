@@ -3,6 +3,13 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Input;
+use App\Restaurant;
+use App\User;
+use App\Booking;
+use App\TableAvailability;
+
 
 class BookingsController extends Controller
 {
@@ -34,7 +41,15 @@ class BookingsController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $user = Auth::user();
+
+        $booking = new Booking;
+        $booking->status = 'Active';
+        $booking->user_id = $user->id;
+        $booking->restaurant_id = $request->input('id');
+        $booking->save();
+
+        return redirect('/profile')->with('success', 'Reservation created.');
     }
 
     /**
