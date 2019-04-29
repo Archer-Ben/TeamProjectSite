@@ -18,7 +18,7 @@
                     </div>
                     <div class="col">
                         {!! Form::open(['action' => 'BookingsController@store', 'method' => 'post']) !!}
-                            {{Form::hidden('restaurant', $restaurant)}}
+                            {{Form::hidden('restaurant_id', $restaurant->id)}}
                             {{Form::submit('Create reservation', ['class' => 'btn btn-primary'])}}
                         {!! Form::close() !!}
                     </div>

@@ -44,22 +44,32 @@
             <div class="card-header">
                 <h3>My Bookings</h3>
             </div>
-            @if(count($bookings) > 0)
-                @foreach($bookings as $booking)
+            <div class="card-body">
+                @if(count($bookings) > 0)
+                <table class="table table-striped">
+                    <thead class ="thead-dark">
+                        <tr>
+                            <th scope="col">Booking ID</th>
+                            <th scope="col">Restaurant</th>
+                            <th scope="col">Reservation made</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                    @foreach($bookings as $booking)
+                        <tr>
+                            <td>{{$booking->id}}</td>
+                            <td>{{$booking->restaurant_name}}</td>
+                            <td>{{$booking->created_at->diffForHumans()}}</td>
+                        </tr>
+                    </tbody>
+                    @endforeach
+                </table>
+                @else
                 <div class="card-body">
-                    <div class="row">
-                        <div class="col">
-                            {{$booking->id}}
-                        </div>
-                        <div class="col">
-                            {{$booking->created_at->diffForHumans()}}
-                        </div>
-                    </div>
-                </div>
-                @endforeach
-            @else
-                <p>You don't have any bookings</p>
-            @endif
+                    <p>You don't have any bookings</p>
+                
+                @endif
+            </div>
         </div>
     </div>
     

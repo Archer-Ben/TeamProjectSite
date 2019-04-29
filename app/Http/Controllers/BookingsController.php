@@ -42,8 +42,8 @@ class BookingsController extends Controller
     public function store(Request $request)
     {
         $user = Auth::user();
-        $restaurant = $request->input('restaurant');
-
+        $restaurant_id = $request->input('restaurant_id');
+        $restaurant = Restaurant::find($restaurant_id);
         $booking = new Booking;
         $booking->status = 'Active';
         $booking->user_id = $user->id;
