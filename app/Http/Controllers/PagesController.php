@@ -8,6 +8,7 @@ use Illuminate\Support\Facades\Input;
 use App\Restaurant;
 use Illuminate\Support\Facades\DB;
 use App\TableAvailability;
+use App\Booking;
 
 class PagesController extends Controller
 {
@@ -42,6 +43,7 @@ class PagesController extends Controller
     public function profile(){
         $title = 'My profile';
         $user = Auth::user();
-        return view('pages.profile', ['title' => $title, 'user' => $user]);
+        $bookings = Booking::where('user_id', $user->id)->orderBy('created_at', 'desc')->get();
+        return view('pages.profile', ['title' => $title, 'user' => $user, 'bookings' => $bookings]);
     }
 }

@@ -18,9 +18,9 @@ class CreateBookingsTable extends Migration
             $table->timestamps();
             $table->enum('status',['Active', 'Confirmed', 'Cancelled', 'Expired']);
             $table->bigInteger('user_id')->unsigned();
-            // $table->foreign('user_id')->references('id')->on('users');
             $table->bigInteger('restaurant_id')->unsigned();
-            // $table->foreign('restaurant_id')->references('id')->on('restaurant');
+            $table->string('user_name');
+            $table->string('restaurant_name');
         });
     }
 

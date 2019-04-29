@@ -121,9 +121,9 @@ class RestaurantsController extends Controller
     {
         $user = Auth::user();
         $restaurant = Restaurant::where('user_id', $id)->firstOrFail();
-        $availabilites = TableAvailability::where('restaurant_id', $restaurant->id)->firstOrFail();
+        $availabilities = TableAvailability::where('restaurant_id', $restaurant->id)->firstOrFail();
         $restaurant->delete();
-        $availabities->delete();
+        $availabilities->delete();
         $user->destroyRestaurant();
         $user->save();
 

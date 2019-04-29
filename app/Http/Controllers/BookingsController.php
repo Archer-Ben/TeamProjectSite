@@ -42,11 +42,14 @@ class BookingsController extends Controller
     public function store(Request $request)
     {
         $user = Auth::user();
+        $restaurant = $request->input('restaurant');
 
         $booking = new Booking;
         $booking->status = 'Active';
         $booking->user_id = $user->id;
-        $booking->restaurant_id = $request->input('id');
+        $booking->restaurant_id = $restaurant->id;
+        $booking->user_name = $user->name;
+        $booking->restaurant_name = $restaurant->name;
         $booking->save();
 
         return redirect('/profile')->with('success', 'Reservation created.');
