@@ -8,6 +8,7 @@ use Illuminate\Support\Facades\Input;
 use App\Restaurant;
 use App\User;
 use App\TableAvailability;
+use App\Booking;
 
 class RestaurantsController extends Controller
 {
@@ -79,12 +80,14 @@ class RestaurantsController extends Controller
         $restaurant = Restaurant::where('user_id', $id)->firstOrFail();
         $availability = TableAvailability::where('restaurant_id', $restaurant->id)->firstOrFail();
         $availabilityArray = json_decode($availability);
+        $bookings = Booking::where('restaurant_id', $restaurant->id)->orderBy('created_at', 'desc')->get();
         return view('restaurants.dashboard', [
             'title' => $title, 
             'user' => $user, 
             'restaurant' => $restaurant,
             'availability' => $availability,
-            'availabilityArray' => $availabilityArray
+            'availabilityArray' => $availabilityArray,
+            'bookings' => $bookings
         ]);
     }
 

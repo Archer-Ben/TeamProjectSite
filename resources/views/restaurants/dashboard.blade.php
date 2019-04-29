@@ -40,5 +40,68 @@
         </div>
     </div>
 
-    </form>
+    <br/>
+    <hr>
+    <br/>
+    {{-- <div class="panel panel-default">
+        <div class="panel-head">
+
+        </div>
+        <div class="panel-body">
+            
+        </div>
+    </div> --}}
+    
+    <div class="card">
+            <div class="card-header">
+                <h3>Bookings</h3>
+            </div>
+            <div class="card-body">
+                @if(count($bookings) > 0)
+                <table class="table table-striped">
+                    <thead class ="thead-dark">
+                        <tr>
+                            <th scope="col">Booking ID</th>
+                            <th scope="col">User</th>
+                            <th scope="col">Reservation made</th>
+                            <th scope="col">Status</th>
+                            <th scope="col">Confirm attendance</th>
+                            <th scope="col">Cancel</th>
+
+                            
+                        </tr>
+                    </thead>
+                    <tbody>
+                    @foreach($bookings as $booking)
+                        <tr>
+                            <td>{{$booking->id}}</td>
+                            <td>{{$booking->user_name}}</td>
+                            <td>{{$booking->created_at->diffForHumans()}}</td>
+                            <td>{{$booking->status}}</td>
+                            <td>
+                                {!! Form::open(['action' => ['BookingsController@update', $booking->id], 'method' => 'post']) !!}
+                                    {{Form::hidden('status', 'Confirmed')}}
+                                    {{Form::hidden('_method', 'put')}}
+                                    {{Form::submit('Confirm', ['class' => 'btn btn-primary btn-sm'])}}
+                                {!! Form::close() !!}
+                            </td>
+                            <td>
+                                    {!! Form::open(['action' => ['BookingsController@update', $booking->id], 'method' => 'post']) !!}
+                                    {{Form::hidden('status', 'Cancelled')}}
+                                    {{Form::hidden('_method', 'put')}}
+                                    {{Form::submit('Cancel reservation', ['class' => 'btn btn-danger btn-sm'])}}
+                                {!! Form::close() !!}
+                            </td>
+                        </tr>
+                    </tbody>
+                    @endforeach
+                </table>
+                @else
+                <div class="card-body">
+                    <p>You don't have any bookings</p>
+                
+                @endif
+            </div>
+        </div>
+    </div>
 @endsection

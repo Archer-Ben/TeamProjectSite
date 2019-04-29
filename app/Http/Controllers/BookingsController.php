@@ -9,6 +9,7 @@ use App\Restaurant;
 use App\User;
 use App\Booking;
 use App\TableAvailability;
+use App\Http\Controllers\RestaurantsController;
 
 
 class BookingsController extends Controller
@@ -20,7 +21,7 @@ class BookingsController extends Controller
      */
     public function index()
     {
-        //
+        return redirect("/restaurants/{{$user->id}}");
     }
 
     /**
@@ -86,7 +87,12 @@ class BookingsController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $booking = Booking::find($id);
+        $booking->status = $request->input('status');
+        $booking->save();
+        $user_id = Auth::user()->id;
+        // return redirect("/profile");
+        return redirect("/restaurants/$user_id");
     }
 
     /**

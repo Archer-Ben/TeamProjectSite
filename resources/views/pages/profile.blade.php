@@ -52,6 +52,8 @@
                             <th scope="col">Booking ID</th>
                             <th scope="col">Restaurant</th>
                             <th scope="col">Reservation made</th>
+                            <th scope="col">Status</th>
+                            <th scope="col">Cancel</th>
                         </tr>
                     </thead>
                     <tbody>
@@ -60,6 +62,14 @@
                             <td>{{$booking->id}}</td>
                             <td>{{$booking->restaurant_name}}</td>
                             <td>{{$booking->created_at->diffForHumans()}}</td>
+                            <td>{{$booking->status}}</td>
+                            <td>
+                                    {!! Form::open(['action' => ['BookingsController@update', $booking->id], 'method' => 'post']) !!}
+                                    {{Form::hidden('status', 'Cancelled')}}
+                                    {{Form::hidden('_method', 'put')}}
+                                    {{Form::submit('Cancel reservation', ['class' => 'btn btn-danger btn-sm'])}}
+                                {!! Form::close() !!}
+                            </td>
                         </tr>
                     </tbody>
                     @endforeach
