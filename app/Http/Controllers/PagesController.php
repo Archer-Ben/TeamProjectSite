@@ -6,14 +6,14 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Input;
 use App\Restaurant;
+use Illuminate\Support\Facades\DB;
+use App\TableAvailability;
 
 class PagesController extends Controller
 {
     public function index(){
         $title = 'Welcome to Table5';
         $user = Auth::user();
-        // $restaurant = Restaurant::where('user_id', $user->id)->first();
-        // return view('pages.index', ['title' => $title, 'user' => $user, 'restaurant' => $restaurant]);
         return view('pages.index', [
             'title' => $title, 
             'user' => $user
@@ -25,8 +25,12 @@ class PagesController extends Controller
         $user = Auth::user();
         $location = Input::get('location');
         $groupsize = Input::get('groupsize');
-        $restaurants = Restaurant::all();
-        return view('pages.results', [
+
+        $availableTables = TableAvailability::where([['size_'.$groupsize, '>', 0]])->pluck('restaurant_id');
+
+        
+        $restaurants = Restaurant::whereIn('id', $availableTables)->get();
+          return view('pages.results', [
             'title' => $title,
             'user' => $user, 
             'location' => $location, 

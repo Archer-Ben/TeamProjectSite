@@ -8,6 +8,11 @@
     <div class="panel panel-default">
         <div class="panel-body">
             <div class="container">
+                <div class="row">
+                    <div class="col-2 border"><strong>Table size</strong></div>
+                    <div class="col-1 border"><strong>Current</strong></div>
+                    <div class="col-1 border"><strong>New</strong></div>
+                </div>
                 {!! Form::open(['action' => ['RestaurantsController@updateAvailability', $restaurant->id], 'method' => 'post']) !!}
                 @for($i = 1; $i <= $restaurant->max_table_size; $i++)
                     <div class="row">
@@ -17,10 +22,10 @@
                         @php
                             $field = "size_".$i
                         @endphp
-                        <div class="col-1">
+                        <div class="col-1 border">
                             {{$availabilityArray->$field}}
                         </div>
-                        <div class="col">
+                        <div class="col-1 border">
                             {{Form::number($field, $availabilityArray->$field, ['min' => 0, 'max' => 100] )}}
                         </div>
                     </div>

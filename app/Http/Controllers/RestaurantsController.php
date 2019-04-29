@@ -47,6 +47,7 @@ class RestaurantsController extends Controller
         $user = Auth::user();
         $restaurant = new Restaurant;
         $restaurant->name = $request->input('name');
+        $restaurant->description = $request->input('description');
         $restaurant->location = $request->input('location');
         $restaurant->latitude = 52.804796;
         $restaurant->longitude = -1.648510;

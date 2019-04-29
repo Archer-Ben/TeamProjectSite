@@ -11,9 +11,11 @@
         <div class="panel-body">
         @if(count($restaurants) > 0)
             @foreach($restaurants as $restaurant)
-                <div class="card">
-                    <div class="col col-"
-                    <h4>{{$restaurant->name}}</h4>
+                <div class="card card-body">
+                    <div class="col col-8">
+                        <h4>{{$restaurant->name}}</h4>
+                        <p>{{$restaurant->description}}</p>
+                    </div>
                 </div>
             @endforeach
         @else

@@ -17,6 +17,7 @@ class CreateRestaurantsTable extends Migration
             $table->bigIncrements('id');
             $table->timestamps();
             $table->string('name');
+            $table->string('description', 255);
             $table->string('location');
             $table->decimal('latitude',10,8);
             $table->decimal('longitude', 11, 8);

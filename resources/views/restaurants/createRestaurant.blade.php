@@ -13,6 +13,11 @@
             {{Form::label('name', 'Restaurant name', ['class' => 'col-sm-2 col-form-label'])}}
             {{Form::text('name', '', ['class' => 'form-control col-sm-10', 'placeholder' => 'Name', 'required' => 'required'])}}
         </div>
+    <!--Description-->
+        <div class="form-group row">
+            {{Form::label('desciption', 'Description', ['class' => 'col-sm-2 col-form-label'])}}
+            {{Form::text('description', '', ['class' => 'form-control col-sm-10', 'placeholder' => 'Short description of restaurant type. (Max 255 characters)', 'maxlength' => 255, 'required' => 'required'])}}
+        </div>
     <!--Address-->
         <div class="form-group row">
             {{Form::label('location', 'Address', ['class' => 'col-sm-2 col-form-label'])}}

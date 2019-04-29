@@ -15,7 +15,7 @@ Route::get('/', 'PagesController@index');
 
 // Route::get('/dashboard', 'PagesController@dashboard')->middleware('auth', 'checkOwnsRestaurant');
 
-Route::get('/results', 'PagesController@results');
+// Route::get('/results', 'PagesController@results');
 
 Route::post('/results', 'PagesController@results');
 
